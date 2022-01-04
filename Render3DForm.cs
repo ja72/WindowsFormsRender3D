@@ -38,7 +38,7 @@ namespace JA
                 Time += timer1.Interval/1000f;
                 Yaw += 0.01f;
                 Pitch += 0.003f;
-                camera.Orientation = Quaternion.CreateFromYawPitchRoll(Yaw, Pitch - 90*deg, 0);
+                camera.Orientation = Quaternion.CreateFromYawPitchRoll(Yaw, Pitch, 0);
                 pictureBox1.Invalidate();
             };
             this.timer1.Start();

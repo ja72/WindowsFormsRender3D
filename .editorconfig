@@ -1,0 +1,18 @@
+# NOTE: Requires **VS2019 16.3** or later
+
+# Rules for JA Projects
+# Description: Code analysis rules for VS2022.csproj.
+
+# Code files
+[*.{cs,vb}]
+
+
+
+dotnet_diagnostic.S1128.severity = none
+
+dotnet_diagnostic.S125.severity = none
+
+dotnet_diagnostic.S1481.severity = suggestion
+
+[*.cs]
+csharp_space_around_binary_operators=ignore

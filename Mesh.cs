@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
@@ -15,6 +16,11 @@ namespace JA
 
         public int[] Face { get; }
         public Color Color { get; set; }
+
+        public void Flip()
+        {
+            Array.Copy(Enumerable.Reverse(Face).ToArray(), Face, Face.Length);
+        }
     }
 
     public class Mesh
@@ -123,9 +129,9 @@ namespace JA
             Vector3 x_axis,
             float length,
             float width)
-        {
+        {            
             x_axis = Vector3.Normalize(x_axis);
-            Vector3 z_axis = Vector3.Normalize(center);
+            Vector3 z_axis = center == Vector3.Zero ? Vector3.UnitZ : Vector3.Normalize(center);
             Vector3 y_axis = Vector3.Cross(z_axis, x_axis);
 
             AddFace(color,
@@ -186,12 +192,16 @@ namespace JA
         public static Mesh CreatePyramid(Color color, float @base, float height)
         {
             var mesh = new Mesh();
-            mesh.AddPanel(color,(-height/4)*Vector3.UnitZ, Vector3.UnitX, @base, @base);
-            mesh.Nodes.Add( (3*height/4)*Vector3.UnitZ);
-            mesh.Elements.Add(new Element(color, 4, 1, 0));
-            mesh.Elements.Add(new Element(color, 4, 2, 1));
-            mesh.Elements.Add(new Element(color, 4, 3, 2));
-            mesh.Elements.Add(new Element(color, 4, 0, 3));
+            mesh.Nodes.Add(new Vector3(-@base/2, -@base/2, 0));
+            mesh.Nodes.Add(new Vector3( @base/2, -@base/2, 0));
+            mesh.Nodes.Add(new Vector3( @base/2,  @base/2, 0));
+            mesh.Nodes.Add(new Vector3(-@base/2,  @base/2, 0));
+            mesh.Elements.Add(new Element(color, 3, 2, 1, 0));
+            mesh.Nodes.Add( height*Vector3.UnitZ);
+            mesh.Elements.Add(new Element(color, 4, 0, 1));
+            mesh.Elements.Add(new Element(color, 4, 1, 2));
+            mesh.Elements.Add(new Element(color, 4, 2, 3));
+            mesh.Elements.Add(new Element(color, 4, 3, 0));
 
             return mesh;
         }
