@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1758
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsRender3D", "WindowsFormsRender3D.csproj", "{7662E484-4E67-40F4-A70A-E325910CDE2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7662E484-4E67-40F4-A70A-E325910CDE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7662E484-4E67-40F4-A70A-E325910CDE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7662E484-4E67-40F4-A70A-E325910CDE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7662E484-4E67-40F4-A70A-E325910CDE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {999BF000-D34E-497B-877E-1745DF295A91}
+	EndGlobalSection
+EndGlobal
