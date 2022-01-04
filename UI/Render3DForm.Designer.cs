@@ -1,4 +1,4 @@
-﻿namespace JA
+﻿namespace JA.UI
 {
     partial class Render3DForm
     {

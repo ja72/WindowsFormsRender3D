@@ -2,8 +2,9 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Numerics;
+using JA.UI;
 
-namespace JA
+namespace JA.Model
 {
     public class Scene
     {
@@ -22,7 +23,7 @@ namespace JA
             using (var pen = new Pen(Color.Black, 0))
             using (var fill = new SolidBrush(Color.Black))
             {
-                var light = Vector3.Normalize(camera.LightPos);
+                var light = camera.LightPos.Unit();
                 var R = Matrix4x4.CreateFromQuaternion(Quaternion.Inverse(camera.Orientation));
                 light = Vector3.TransformNormal(light, R);
 
@@ -32,12 +33,11 @@ namespace JA
                     {
                         var element = mesh.Elements[index];
                         var gp = new GraphicsPath();
-                        var nodePos = mesh.GetNodes(index);
-                        var normal = mesh.GetNormal(nodePos);
+                        var poly = mesh.GetPolygon(index);
 
-                        gp.AddPolygon(camera.Project(nodePos));
+                        gp.AddPolygon(camera.Project(poly));
 
-                        if (camera.IsVisible(nodePos[0], normal))
+                        if (camera.IsVisible(poly))
                         {
                             var (H, S, L) = element.Color.GetHsl();
                             var color = (H, S, L).GetColor(0.5f);

@@ -15,7 +15,7 @@ namespace JA
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Render3DForm());
+            Application.Run(new UI.Render3DForm());
         }
     }
 }

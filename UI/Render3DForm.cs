@@ -9,8 +9,10 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using JA.Model;
+using JA.UI;
 
-namespace JA
+namespace JA.UI
 {
     public partial class Render3DForm : Form
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JA
+namespace JA.UI
 {
     public static class Gdi
     {
@@ -17,7 +17,7 @@ namespace JA
         /// <returns>An HSL tuple</returns> 
         public static (float H, float S, float L) GetHsl(this Color color)
         {
-            var H = color.GetHue() / 360f; 
+            var H = color.GetHue() / 360f;
             var L = color.GetBrightness();
             var S = color.GetSaturation();
 
@@ -35,8 +35,8 @@ namespace JA
             float temp1, temp2;
             // Clamp HSL between 0..1
             hsl = (
-                Math.Max(0, Math.Min(1f, hsl.H)), 
-                Math.Max(0, Math.Min(1f, hsl.S)), 
+                Math.Max(0, Math.Min(1f, hsl.H)),
+                Math.Max(0, Math.Min(1f, hsl.S)),
                 Math.Max(0, Math.Min(1f, hsl.L)));
             if (hsl.L == 0) r = g = b = 0;
             else
@@ -44,7 +44,7 @@ namespace JA
                 if (hsl.S == 0) r = g = b = hsl.L;
                 else
                 {
-                    temp2 = ((hsl.L <= 0.5f) ? hsl.L * (1f + hsl.S) : hsl.L + hsl.S - (hsl.L * hsl.S));
+                    temp2 = hsl.L <= 0.5f ? hsl.L * (1f + hsl.S) : hsl.L + hsl.S - hsl.L * hsl.S;
                     temp1 = 2f * hsl.L - temp2;
 
                     var t3 = new[] { hsl.H + 1 / 3f, hsl.H, hsl.H - 1 / 3f };
@@ -56,7 +56,7 @@ namespace JA
 
                         if (6.0 * t3[i] < 1.0) clr[i] = temp1 + (temp2 - temp1) * t3[i] * 6f;
                         else if (2.0 * t3[i] < 1.0) clr[i] = temp2;
-                        else if (3.0 * t3[i] < 2.0) clr[i] = (temp1 + (temp2 - temp1) * ((2 / 3f) - t3[i]) * 6);
+                        else if (3.0 * t3[i] < 2.0) clr[i] = temp1 + (temp2 - temp1) * (2 / 3f - t3[i]) * 6;
                         else clr[i] = temp1;
                     }
                     r = clr[0];

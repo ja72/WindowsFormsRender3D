@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JA
+namespace JA.Model
 {
     public static class LinearAlebra
     {
@@ -19,7 +20,7 @@ namespace JA
             return sum;
         }
         public static Vector3 Average(this Vector3[] vectors)
-            => Sum(vectors) / vectors.Length;
+            => vectors.Sum() / vectors.Length;
 
         public static Vector3 GetNormal(Vector3 A, Vector3 B, Vector3 C)
         {
@@ -29,5 +30,9 @@ namespace JA
                 + Vector3.Cross(C, A)
                 );
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Unit(this Vector3 vector)
+            => Vector3.Zero == vector ? Vector3.Zero : Vector3.Normalize(vector);
     }
 }

@@ -4,8 +4,9 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Numerics;
 using System.Windows.Forms;
+using JA.Model;
 
-namespace JA
+namespace JA.UI
 {
     public delegate void CameraPaintHandler(Camera camera, Graphics g);
 
@@ -40,9 +41,10 @@ namespace JA
         public Quaternion Orientation { get; set; }
         public Vector3 LightPos { get; set; }
 
-        public float DrawSize { get => 2 * (float)Math.Tan((FOV / 2) * Math.PI / 180); }
+        public float DrawSize { get => 2 * (float)Math.Tan(FOV / 2 * Math.PI / 180); }
         public Vector3 EyePos { get => Vector3.Transform(Vector3.UnitZ * SceneSize / DrawSize, Quaternion.Inverse(Orientation)); }
 
+        public PointF[] Project(Polygon polygon) => Project(polygon.Nodes);
         /// <summary>
         /// Projects the specified nodes into a 2D canvas by applied the camera 
         /// orientation and projection.
@@ -51,7 +53,7 @@ namespace JA
         /// <returns>A list of Gdi points</returns>
         public PointF[] Project(Vector3[] nodes)
         {
-            float r = 2 * (float)Math.Tan((FOV / 2) * Math.PI / 180);
+            float r = 2 * (float)Math.Tan(FOV / 2 * Math.PI / 180);
             float L = SceneSize / r;
             int wt = Target.ClientSize.Width - Target.Margin.Left - Target.Margin.Right;
             int ht = Target.ClientSize.Height - Target.Margin.Top - Target.Margin.Bottom;
@@ -69,6 +71,8 @@ namespace JA
 
             return points;
         }
+        public bool IsVisible(Polygon polygon)
+            => polygon.Nodes.Length <3 || IsVisible(polygon.Nodes[0], polygon.Normal);
         /// <summary>
         /// Determines whether a face is visible. 
         /// </summary>

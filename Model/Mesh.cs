@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Numerics;
 
-namespace JA
+namespace JA.Model
 {
     public class Element
     {
@@ -19,7 +19,7 @@ namespace JA
 
         public void Flip()
         {
-            Array.Copy(Enumerable.Reverse(Face).ToArray(), Face, Face.Length);
+            Array.Copy(Face.Reverse().ToArray(), Face, Face.Length);
         }
     }
 
@@ -44,7 +44,7 @@ namespace JA
         public Vector3[] GetNodes(int index)
         {
             var R = Matrix4x4.CreateFromQuaternion(Orientation);
-            return Elements[index].Face.Select(ni => Position + Vector3.Transform(Nodes[ni],R)).ToArray();
+            return Elements[index].Face.Select(ni => Position + Vector3.Transform(Nodes[ni], R)).ToArray();
         }
         /// <summary>
         /// Gets the normal vector of a face, applying the mesh transformation.
@@ -54,6 +54,8 @@ namespace JA
         {
             return GetNormals(GetNodes(index));
         }
+
+        public Polygon GetPolygon(int index) => new Polygon(GetNodes(index));
 
         /// <summary>
         /// Gets the normal vectors of a face at each node, applying the mesh transformation.
@@ -69,11 +71,11 @@ namespace JA
 
                 Vector3 A = nodes[i], B = nodes[j], C = nodes[k];
 
-                normals[i] = Vector3.Normalize(
+                normals[i] = (
                     Vector3.Cross(A, B)
                     + Vector3.Cross(B, C)
                     + Vector3.Cross(C, A)
-                    );
+                    ).Unit();
             }
 
             return normals;
@@ -90,7 +92,7 @@ namespace JA
             {
                 n += list[i];
             }
-            return Vector3.Normalize(n);
+            return n.Unit();
         }
 
         /// <summary>
@@ -129,9 +131,9 @@ namespace JA
             Vector3 x_axis,
             float length,
             float width)
-        {            
-            x_axis = Vector3.Normalize(x_axis);
-            Vector3 z_axis = center == Vector3.Zero ? Vector3.UnitZ : Vector3.Normalize(center);
+        {
+            x_axis = x_axis.Unit();
+            Vector3 z_axis = center == Vector3.Zero ? Vector3.UnitZ : center.Unit();
             Vector3 y_axis = Vector3.Cross(z_axis, x_axis);
 
             AddFace(color,
@@ -193,11 +195,11 @@ namespace JA
         {
             var mesh = new Mesh();
             mesh.Nodes.Add(new Vector3(-@base/2, -@base/2, 0));
-            mesh.Nodes.Add(new Vector3( @base/2, -@base/2, 0));
-            mesh.Nodes.Add(new Vector3( @base/2,  @base/2, 0));
-            mesh.Nodes.Add(new Vector3(-@base/2,  @base/2, 0));
+            mesh.Nodes.Add(new Vector3(@base/2, -@base/2, 0));
+            mesh.Nodes.Add(new Vector3(@base/2, @base/2, 0));
+            mesh.Nodes.Add(new Vector3(-@base/2, @base/2, 0));
             mesh.Elements.Add(new Element(color, 3, 2, 1, 0));
-            mesh.Nodes.Add( height*Vector3.UnitZ);
+            mesh.Nodes.Add(height*Vector3.UnitZ);
             mesh.Elements.Add(new Element(color, 4, 0, 1));
             mesh.Elements.Add(new Element(color, 4, 1, 2));
             mesh.Elements.Add(new Element(color, 4, 2, 3));
