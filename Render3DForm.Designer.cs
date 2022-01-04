@@ -1,6 +1,6 @@
 ﻿namespace JA
 {
-    partial class Form1
+    partial class Render3DForm
     {
         /// <summary>
         /// Required designer variable.

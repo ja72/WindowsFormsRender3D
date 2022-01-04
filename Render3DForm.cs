@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace JA
 {
-    public partial class Form1 : Form
+    public partial class Render3DForm : Form
     {
         readonly Camera camera;
         const float pi = (float)Math.PI;
@@ -23,7 +23,7 @@ namespace JA
         public float Time { get; set; }
         public Scene Scene { get; set; }
 
-        public Form1()
+        public Render3DForm()
         {
             InitializeComponent();
 
@@ -82,8 +82,7 @@ namespace JA
             {
                 var mesh = Mesh.CreateCube(Color.Blue, 2f);
                 mesh.Elements[0].Color = Color.Red;
-                //mesh.Orientation = Quaternion.CreateFromYawPitchRoll(0, 90 * deg, 0);
-                mesh.Position = -0.75f * Vector3.UnitY;
+                mesh.Position = -1f * Vector3.UnitY;
                 Scene.Meshes.Add(mesh);
             }
         }

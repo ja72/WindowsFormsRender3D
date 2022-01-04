@@ -186,8 +186,8 @@ namespace JA
         public static Mesh CreatePyramid(Color color, float @base, float height)
         {
             var mesh = new Mesh();
-            mesh.AddPanel(color, Vector3.Zero, Vector3.UnitX, @base, @base);
-            mesh.Nodes.Add(Vector3.UnitZ * height);
+            mesh.AddPanel(color,(-height/4)*Vector3.UnitZ, Vector3.UnitX, @base, @base);
+            mesh.Nodes.Add( (3*height/4)*Vector3.UnitZ);
             mesh.Elements.Add(new Element(color, 4, 1, 0));
             mesh.Elements.Add(new Element(color, 4, 2, 1));
             mesh.Elements.Add(new Element(color, 4, 3, 2));
