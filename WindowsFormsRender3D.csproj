@@ -40,6 +40,7 @@
     <LangVersion>latest</LangVersion>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeAnalysisRuleSet>..\JA.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,35 +51,67 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Polygon.cs" />
-    <Compile Include="UI\Camera.cs" />
-    <Compile Include="UI\Render3DForm.cs">
+    <Compile Include="Constants.cs" />
+    <Compile Include="Geometry\Bounds.cs" />
+    <Compile Include="Drawing\FastBitmap.cs" />
+    <Compile Include="Drawing\VisibleObject.cs" />
+    <Compile Include="Dynamics\Dynamics.cs" />
+    <Compile Include="Dynamics\Matrix3.cs" />
+    <Compile Include="Dynamics\Pose.cs" />
+    <Compile Include="Dynamics\Quaternion.cs" />
+    <Compile Include="Dynamics\Simulation.cs" />
+    <Compile Include="Dynamics\Vector3.cs" />
+    <Compile Include="Dynamics\BodyState.cs" />
+    <Compile Include="Geometry\BezierCurve.cs" />
+    <Compile Include="Geometry\Geometry.cs" />
+    <Compile Include="Geometry\Hemisphere.cs" />
+    <Compile Include="Geometry\Polygon.cs" />
+    <Compile Include="Geometry\Pose.cs" />
+    <Compile Include="Dynamics\RigidBody.cs" />
+    <Compile Include="Geometry\Ray.cs" />
+    <Compile Include="Dynamics\Vector33.cs" />
+    <Compile Include="Drawing\Camera.cs" />
+    <Compile Include="Render3DForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Render3DForm.Designer.cs">
+    <Compile Include="Render3DForm.Designer.cs">
       <DependentUpon>Render3DForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Gdi.cs" />
-    <Compile Include="Model\LinearAlebra.cs" />
-    <Compile Include="Model\Mesh.cs" />
+    <Compile Include="Drawing\Gdi.cs" />
+    <Compile Include="Geometry\Mesh.cs" />
+    <Compile Include="Geometry\Sphere.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Scene.cs" />
-    <Compile Include="Model\Triangle.cs" />
-    <EmbeddedResource Include="UI\Render3DForm.resx">
+    <Compile Include="Drawing\Scene.cs" />
+    <Compile Include="Geometry\Triangle.cs" />
+    <Compile Include="Drawing\Style.cs" />
+    <EmbeddedResource Include="Render3DForm.resx">
       <DependentUpon>Render3DForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -92,6 +125,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

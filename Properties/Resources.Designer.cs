@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace JA.UI {
+namespace JA.Drawing {
     using System;
     
     

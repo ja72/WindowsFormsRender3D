@@ -1,20 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1758
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsRender3D", "WindowsFormsRender3D.csproj", "{7662E484-4E67-40F4-A70A-E325910CDE2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7662E484-4E67-40F4-A70A-E325910CDE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7662E484-4E67-40F4-A70A-E325910CDE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7662E484-4E67-40F4-A70A-E325910CDE2E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7662E484-4E67-40F4-A70A-E325910CDE2E}.Debug|x64.Build.0 = Debug|Any CPU
 		{7662E484-4E67-40F4-A70A-E325910CDE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7662E484-4E67-40F4-A70A-E325910CDE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7662E484-4E67-40F4-A70A-E325910CDE2E}.Release|x64.ActiveCfg = Release|Any CPU
+		{7662E484-4E67-40F4-A70A-E325910CDE2E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
