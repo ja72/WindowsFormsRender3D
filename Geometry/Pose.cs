@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JA.Geometry
-{
+{ 
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public readonly struct Pose 
         : IEquatable<Pose>

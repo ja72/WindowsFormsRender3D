@@ -62,7 +62,7 @@ namespace JA.Dynamics
         public static Vector3 Normalize(Vector3 vector)
         {
             double m2 = vector.MagnitudeSquared;
-            if (m2 > tiny_sq)
+            if (m2 > tiny*tiny)
             {
                 return Scale(1 / Math.Sqrt(m2), vector);
             }

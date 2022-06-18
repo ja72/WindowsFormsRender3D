@@ -13,7 +13,6 @@ namespace JA.Drawing
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public abstract class VisibleObject : IRender
     {
-
         public abstract void Render(Graphics g, Camera camera, Pose pose);
 
         [Experimental]
@@ -75,7 +74,7 @@ namespace JA.Drawing
                     Scale*Vector3.UnitY,
                     Scale*Vector3.UnitZ };
 
-            var triad = pose.FromLocal( Geometry.FromLocal(nodes) );
+            var triad = pose.FromLocal(Geometry.FromLocal(nodes));
 
             var cs = camera.Project(triad);
 
@@ -83,7 +82,7 @@ namespace JA.Drawing
             Gdi.Style.AddEndArrow();
             g.DrawLine(Color.Red, cs[0], cs[1]);
             g.DrawLine(Color.Green, cs[0], cs[2]);
-            g.DrawLine(Color.Blue, cs[0], cs[3]);            
+            g.DrawLine(Color.Blue, cs[0], cs[3]);
             Gdi.Style.Clear();
 
             g.DrawLabel(Color.Black, cs[0], Label, ContentAlignment.TopRight);
@@ -103,7 +102,7 @@ namespace JA.Drawing
         public ISolid Geometry { get; set; }
     }
 
-    public abstract class VisibleGeometry : VisibleObject 
+    public abstract class VisibleGeometry : VisibleObject
     {
         protected VisibleGeometry(IGeometry geometry, Color color)
         {
@@ -165,7 +164,7 @@ namespace JA.Drawing
         public VisibleMesh(Mesh mesh, Color color) : base(mesh, color)
         {
             Mesh= mesh;
-            ElementColors = Enumerable.Repeat(color, mesh.Elements.Count).ToArray();
+            ElementColors = Enumerable.Repeat(color, mesh.Faces.Count).ToArray();
         }
         public Mesh Mesh { get; }
         public Vector3 Center { get => Geometry.Center; }
@@ -175,9 +174,8 @@ namespace JA.Drawing
         {
             Gdi.Style.Clear();
             Gdi.Style.Stroke.Width = 0;
-            for (int k = 0; k < Mesh.Elements.Count; k++)
+            for (int k = 0; k < Mesh.Faces.Count; k++)
             {
-                var element = Mesh.Elements[k];
                 var color = ElementColors[k];
                 var poly = Mesh.GetPolygon(k).FromLocal(pose);
 
@@ -189,5 +187,34 @@ namespace JA.Drawing
             Gdi.Style.Clear();
         }
         public override string ToString() => $"MeshObject({Geometry})";
+    }
+
+    public class VisiblePoint : VisibleObject
+    {
+        public VisiblePoint(string label, Color color, float size = 4f)
+        {
+            Label = label;
+            Color=color;
+            Size=size;
+        }
+
+        public Color Color { get; }
+        public float Size { get; }
+        public string Label { get; }
+
+        public override void Render(Graphics g, Camera camera, Pose pose)
+        {
+            var pixel = camera.Project(pose.Position);
+            g.DrawPoint(Color, pixel, Size);
+            if (!string.IsNullOrEmpty(Label))
+            {
+                g.DrawLabel(Color, pixel, Label, ContentAlignment.BottomRight);
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"Point(Color={Color}, Size={Size})";
+        }
     }
 }

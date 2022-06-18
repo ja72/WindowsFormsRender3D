@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace JA.Drawing
 {
     using static SingleConstants;
-
+     
     public static class Gdi
     {
         /// <summary> 
@@ -34,7 +34,7 @@ namespace JA.Drawing
         /// <returns>A Color structure containing the equivalent RGB values</returns>
         public static Color GetColor(this (float H, float S, float L) hsl, float alpha = 1f)
         {
-            float r = 0, g = 0, b = 0;
+            float r, g, b;
             float temp1, temp2;
             // Clamp HSL between 0..1
             hsl = (

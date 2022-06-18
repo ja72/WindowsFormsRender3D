@@ -1,12 +1,13 @@
-﻿using System.Linq;
-
+﻿using System;
+using System.Linq;
+using System.ComponentModel;
+using System.Drawing;
 
 namespace JA.Dynamics
 {
-    using System;
-    using System.ComponentModel;
-    using System.Drawing;
     using JA.Geometry;
+
+    using static DoubleConstants;
 
     public delegate Vector33 BodyLoading(double time, Pose pose, Vector33 motion);
     [TypeConverter(typeof(ExpandableObjectConverter))]
@@ -139,7 +140,7 @@ namespace JA.Dynamics
             //\tau_{A}&=I_{C}\,\alpha+\omega\times I_{C}\,\omega+ c\times F
             // \end{aligned}$$
 
-            var v_A = velocity.Translational;
+            //var v_A = velocity.Translational;
             var ω = velocity.Rotational;
             var a_A = acceleration.Translational;
             var α = acceleration.Rotational;
@@ -155,7 +156,7 @@ namespace JA.Dynamics
             //a_{A}&=\tfrac{1}{m}F-\alpha\times c-\omega\times\left(\omega\times c\right)
             // \end{aligned}$$
 
-            var v_A = velocity.Translational;
+            //var v_A = velocity.Translational;
             var ω = velocity.Rotational;
             var F = netLoad.Translational;
             var τ_A = netLoad.Rotational;
@@ -188,7 +189,7 @@ namespace JA.Dynamics
 
         public void Render(Graphics g, Drawing.Camera camera, JA.Geometry.Pose pose)
         {
-            if (CG.MagnitudeSquared > DoubleConstants.tiny_sq)
+            if (CG.MagnitudeSquared > tiny*tiny)
             {
                 // only draw handle if way from CG
                 var handle = new Drawing.VisibleTriad("A", 0.5f);

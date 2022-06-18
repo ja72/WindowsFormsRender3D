@@ -4,11 +4,13 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Numerics;
 using System.Windows.Forms;
+using System.Runtime.CompilerServices;
 
 namespace JA.Drawing
 {
-    using System.Runtime.CompilerServices;
+    using System.Diagnostics;
     using JA.Geometry;
+
     using static SingleConstants;
 
     public delegate void CameraPaintHandler(Camera camera, Graphics g);
@@ -53,8 +55,8 @@ namespace JA.Drawing
 
                 if (ev.Button == MouseButtons.Right)
                 {
-                    var ptDn = UnProject(mouse.msDown);
-                    var ptMv = UnProject(mouse.msMove);
+                    var ptDn = UnProject(mouse.msDown, 1.4f);
+                    var ptMv = UnProject(mouse.msMove, 1.4f);
                     Vector3 a = ptDn-Target;
                     Vector3 b = ptMv-Target;
                     if (a!=b)
@@ -139,9 +141,10 @@ namespace JA.Drawing
         protected PointF Project(Vector3 node, float f, float camDist, Matrix4x4 R)
         {
             var point = Vector3.Transform(node-Target, R);
-            return new PointF(
-                +f  * point.X / (camDist - point.Z),
-                -f  * point.Y / (camDist - point.Z));
+            PointF pixel = new PointF(
+                            +f * point.X / (camDist - point.Z),
+                            -f * point.Y / (camDist - point.Z));
+            return pixel;
         }
         public RectangleF Project(Bounds bounds)
         {
@@ -195,8 +198,11 @@ namespace JA.Drawing
             Ray ray = CastRayThroughPixel(pixel);
             Sphere arcBall = new Sphere(Target, arcBallFactor * SceneSize/2);
             var Rt = Matrix4x4.CreateFromQuaternion(Quaternion.Inverse(Orientation));
-            bool hit = arcBall.Hit(ray, out var t);
-            return Vector3.Transform(ray.GetPointAlong(t), Rt);
+            if (arcBall.Hit(ray, out var t))
+            {
+                return Vector3.Transform(ray.GetPointAlong(t), Rt);
+            }
+            return Vector3.Zero;
         }
 
         public Ray CastRayThroughPixel(Point pixel)

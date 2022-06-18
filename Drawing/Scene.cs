@@ -3,13 +3,11 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Numerics;
+using System.ComponentModel;
 
 namespace JA.Drawing
 {
-    using System.ComponentModel;
-    using JA.Drawing;
     using JA.Geometry;
-
 
     public class Scene
     {
@@ -32,9 +30,9 @@ namespace JA.Drawing
         public void Render(Graphics g, Camera camera)
         {
             var state = camera.SetupView(g);
-            var light = camera.LightPos.Unit();
-            var R = Matrix4x4.CreateFromQuaternion(Quaternion.Inverse(camera.Orientation));
-            light = Vector3.TransformNormal(light, R);
+            //var light = camera.LightPos.Unit();
+            //var R = Matrix4x4.CreateFromQuaternion(Quaternion.Inverse(camera.Orientation));
+            //light = Vector3.TransformNormal(light, R);
 
             Triad.Render(g, camera, Pose.Identity);
 

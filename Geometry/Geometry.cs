@@ -132,11 +132,11 @@ namespace JA.Geometry
         }
         public static Mesh FromLocal(this Mesh mesh, Pose pose)
         {
-            return new Mesh(mesh.Nodes.Select((n) => pose.FromLocal(n)), mesh.Elements);
+            return new Mesh(mesh.Nodes.Select((n) => pose.FromLocal(n)), mesh.Faces);
         }
         public static Mesh ToLocal(this Mesh mesh, Pose pose)
         {
-            return new Mesh(mesh.Nodes.Select((n) => pose.ToLocal(n)), mesh.Elements);
+            return new Mesh(mesh.Nodes.Select((n) => pose.ToLocal(n)), mesh.Faces);
         }
     }
 }

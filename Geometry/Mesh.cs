@@ -45,10 +45,10 @@ namespace JA.Geometry
             Volume = 0;
         }
 
-        public Mesh(IEnumerable<Vector3> nodes, IEnumerable<Face> elements)
+        public Mesh(IEnumerable<Vector3> nodes, IEnumerable<Face> faces)
         {
-            nodes= new List<Vector3>(nodes);
-            elements=new List<Face>(elements);
+            this.nodes= new List<Vector3>(nodes);
+            this.faces =new List<Face>(faces);
             CalculateVolumeProperties();
         }
 
@@ -57,7 +57,7 @@ namespace JA.Geometry
         #region Properties
         public IEnumerator<Polygon> GetEnumerator()
         {
-            for (int i = 0; i < Elements.Count; i++)
+            for (int i = 0; i < faces.Count; i++)
             {
                 yield return GetPolygon(i);
             }
@@ -65,7 +65,7 @@ namespace JA.Geometry
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
         public IReadOnlyList<Vector3> Nodes => nodes;
-        public IReadOnlyList<Face> Elements => faces;
+        public IReadOnlyList<Face> Faces => faces;
         public float Volume { get; private set; }
         public Vector3 Center { get; private set; }
 
@@ -102,7 +102,7 @@ namespace JA.Geometry
         public Vector3[] GetNodes(int index)
         {
             //var R = Matrix4x4.CreateFromQuaternion(pose.Orientation);
-            return Elements[index].NodeIndex.Select(ni => Nodes[ni]).ToArray();
+            return faces[index].NodeIndex.Select(ni => Nodes[ni]).ToArray();
         }
         /// <summary>
         /// Gets the normal vector of a face, applying the mesh transformation.
@@ -297,7 +297,7 @@ namespace JA.Geometry
 
         public override string ToString()
         {
-            return $"|N={Nodes.Count}, E={Elements.Count}|";
+            return $"|Faces={faces.Count}, Center={Center}, Volume={Volume}|";
         }
     }
 
@@ -357,16 +357,6 @@ namespace JA.Geometry
         {
             var mesh = new Mesh();
             float half = side/2;
-            //mesh.Nodes.Add(new Vector3(-half, -half, 0));
-            //mesh.Nodes.Add(new Vector3(half, -half, 0));
-            //mesh.Nodes.Add(new Vector3(half, half, 0));
-            //mesh.Nodes.Add(new Vector3(-half, half, 0));
-            //mesh.Elements.Add(new Face(3, 2, 1, 0));
-            //mesh.Nodes.Add(height*Vector3.UnitZ);
-            //mesh.Elements.Add(new Face(4, 0, 1));
-            //mesh.Elements.Add(new Face(4, 1, 2));
-            //mesh.Elements.Add(new Face(4, 2, 3));
-            //mesh.Elements.Add(new Face(4, 3, 0));
 
             var botIndex = mesh.AddFace(
                 new Vector3(-half, -half, 0),

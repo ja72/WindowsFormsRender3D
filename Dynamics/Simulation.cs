@@ -170,9 +170,9 @@ namespace JA.Dynamics
             var state = g.Save();
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.TranslateTransform(camera.OnControl.ClientSize.Width / 2f, camera.OnControl.ClientSize.Height / 2f);
-            var light = camera.LightPos.Unit();
-            var R = System.Numerics.Matrix4x4.CreateFromQuaternion(System.Numerics.Quaternion.Inverse(camera.Orientation));
-            light = System.Numerics.Vector3.TransformNormal(light, R);
+            //var light = camera.LightPos.Unit();
+            //var R = System.Numerics.Matrix4x4.CreateFromQuaternion(System.Numerics.Quaternion.Inverse(camera.Orientation));
+            //light = System.Numerics.Vector3.TransformNormal(light, R);
 
             Triad.Render(g, camera, Pose.Identity.ToFloat());
 

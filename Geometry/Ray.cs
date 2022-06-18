@@ -12,7 +12,7 @@ namespace JA.Geometry
     using static SingleConstants;
 
     [TypeConverter(typeof(ExpandableObjectConverter))]
-    public readonly struct Ray
+    public readonly struct Ray : ICurve
     {
         readonly (Vector3 origin, Vector3 direction) data;
 
@@ -29,6 +29,16 @@ namespace JA.Geometry
 
         public float GetDistanceTo(Vector3 point)
             => Vector3.Dot(Direction, point-Origin);
+
+        public bool Contains(Vector3 target)
+        {
+            return Vector3.Distance(target, GetPointAlong(GetDistanceTo(target))) <= small;
+        }
+
+        public Bounds GetBounds()
+        {
+            return Bounds.FromPointCloud(Origin, Direction/small);
+        }
 
         public bool Intersect(Plane plane, out float distance)
         {
