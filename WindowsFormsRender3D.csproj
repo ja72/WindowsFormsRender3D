@@ -155,5 +155,644 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player FastFwd.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player FastRwd.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Next.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Pause.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Play.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Previous.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Slow.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Stop.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow - Down.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow - Left.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow - Right.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow - Up.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Attach.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Back.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calc.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Equal.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Link.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Minus.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\No.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ok.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pen.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plus.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rotate.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sleep.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Star Empty.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Star.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Star2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Time.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Trash.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Under Construction.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Write.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow - Down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow - Left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow - Right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow - Up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Equal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player FastFwd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player FastRwd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Slow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rotate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sleep.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Star Empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Star2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Under Construction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Write.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Action Redo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Action Undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow - DownLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow - DownRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow - UpLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow - UpRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow Next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow Previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow2 - Down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow2 - Left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow2 - Right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow2 - Up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Attach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Back Top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bubble1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bubble2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bubble3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bubble4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bubble5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bubble6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Amp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Bracket Left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Bracket Right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Colon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Comma.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Dot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Less.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - More.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Number.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Parenthesis Left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Parenthesis Right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Percent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Quotation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Semicolon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Slash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Smiley 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Smiley 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Smiley 3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Smiley 4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Char - Tilde.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clipboard Copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clipboard Cut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clipboard Paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Computer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Construction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copyright.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Document Graph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Document Spreadsheet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Document Text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dollar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dollar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Email.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Euro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exclamation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Face Happy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Face Sad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Face.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder Open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder Up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Forbidden.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fullscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gears.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Globe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Health.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Internet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Light Off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lock Open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Loop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Media.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mouse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Music.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Music2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\My Documents.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\My Images.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\My Music.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Network.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\No.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nuke.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ok2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Percent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Photo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plane.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Eject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player Record.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pointer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Poll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Print Preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Properties.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question - Bold.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Recycle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rss 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rss 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Security.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shutdown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sound Decrease.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sound Increase.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sound Mute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Standby.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stats.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Target.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text Decrease.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text Increase.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Upload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wizard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Woman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom In.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom Out.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

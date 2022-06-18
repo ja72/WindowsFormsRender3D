@@ -138,5 +138,13 @@ namespace JA.Geometry
         {
             return new Mesh(mesh.Nodes.Select((n) => pose.ToLocal(n)), mesh.Faces);
         }
+        public static bool IsFinite(this float value)
+            => !float.IsInfinity(value) && !float.IsNaN(value);
+        public static bool IsFinite(this Vector3 vector)
+        {
+            return !float.IsInfinity(vector.X) && !float.IsNaN(vector.X)
+                && !float.IsInfinity(vector.Y) && !float.IsNaN(vector.Y)
+                && !float.IsInfinity(vector.Z) && !float.IsNaN(vector.Z);
+        }
     }
 }

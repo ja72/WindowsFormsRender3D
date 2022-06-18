@@ -68,5 +68,15 @@ namespace JA.Dynamics
             }
             throw new NotSupportedException();
         }
+        public static bool IsFinite(this double value)
+            => !double.IsInfinity(value) && !double.IsNaN(value);
+
+        public static bool IsFinite(this Vector3 vector)
+        {
+            return !double.IsInfinity(vector.X) && !double.IsNaN(vector.X)
+                && !double.IsInfinity(vector.Y) && !double.IsNaN(vector.Y)
+                && !double.IsInfinity(vector.Z) && !double.IsNaN(vector.Z);
+        }
+
     }
 }

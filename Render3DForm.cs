@@ -39,6 +39,7 @@ namespace JA
         public Simulation Simulation { get; }
         public Camera Camera1 { get; }
         public Camera Camera2 { get; }
+        public bool Running { get; set; } = false;
 
         public Render3DForm()
         {
@@ -63,7 +64,10 @@ namespace JA
             this.timer1.Interval = 15;
             this.timer1.Tick += (s, ev) =>
             {
-                Simulation.Run(Simulation.Time + TimeStep);
+                if (Running)
+                {
+                    Simulation.Run(Simulation.Time + TimeStep);
+                }
                 Camera1.Orientation = Quaternion.Multiply(Camera1.Orientation, FromRollPitchYaw(TimeStep*RollRate, TimeStep*PitchRate, TimeStep*YawRate));
                 Camera2.Orientation = Quaternion.Multiply(Camera2.Orientation, FromRollPitchYaw(TimeStep*RollRate, TimeStep*PitchRate, TimeStep*YawRate));
                 pictureBox1.Invalidate();
@@ -72,8 +76,7 @@ namespace JA
                 propertyGrid2.Refresh();
             };
 
-            this.timer1.Start();
-
+            this.timer1.Start();            
             this.KeyDown += (s, ev) =>
             {
                 switch (ev.KeyCode)
@@ -82,14 +85,7 @@ namespace JA
                         this.Close();
                         break;
                     case Keys.Space:
-                        if (timer1.Enabled)
-                        {
-                            timer1.Stop();
-                        }
-                        else
-                        {
-                            timer1.Start();
-                        }
+                        Running = !Running;
                         break;
                 }
             };
@@ -103,7 +99,9 @@ namespace JA
             {
                 g.DrawString(c.Name, SystemFonts.IconTitleFont, SystemBrushes.ControlText, 2, 2);
                 Simulation.Render(c, g);
-            };
+            };            
+
+            this.Text = "3D Scene Render - Right Mouse Drag to orbit camera.";
         }
         protected override void OnLoad(EventArgs e)
         {
@@ -152,7 +150,7 @@ namespace JA
             var v6 = new Dynamics.Vector33(
                 0.0*Dynamics.Vector3.UnitX,
                 5*Dynamics.Vector3.UnitZ);
-            var rb6 = Simulation.AddBody(0.12, d6, p6 , v6);
+            _ = Simulation.AddBody(0.12, d6, p6, v6);
 
             //var p7 = new Dynamics.Pose(-cg);
             //var v7 = Dynamics.Vector33.TwistAt(
@@ -166,7 +164,7 @@ namespace JA
                 5*Dynamics.Vector3.UnitY,
                 p7.FromLocalDirection(d7.Center),
                 0.0*Dynamics.Vector3.UnitX);
-            var rb7 = Simulation.AddBody(0.08, d7, p7, v7);
+            _ = Simulation.AddBody(0.08, d7, p7, v7);
 
             Simulation.Reset();
 
@@ -174,6 +172,32 @@ namespace JA
             propertyGrid2.SelectedObject = Scene;
 
             //TimeFactor = 0.2f;
+
+            stopButton_Click(this, null);
+            tabControl1.SelectedIndex = 0;
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            Running = false;
+            Simulation.Reset();            
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            Running = false;
+            playButton.Enabled = true;
+            stopButton.Enabled = false;
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void playButton_Click(object sender, EventArgs e)
+        {
+            Running = true;
+            playButton.Enabled = false;
+            stopButton.Enabled = true;
+            tabControl1.SelectedIndex = 1;
         }
     }
 }

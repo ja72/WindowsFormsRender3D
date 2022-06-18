@@ -55,16 +55,22 @@ namespace JA.Drawing
 
                 if (ev.Button == MouseButtons.Right)
                 {
-                    var ptDn = UnProject(mouse.msDown, 1.4f);
-                    var ptMv = UnProject(mouse.msMove, 1.4f);
+                    var ptDn = UnProject(mouse.msDown, 1.6f);
+                    var ptMv = UnProject(mouse.msMove, 1.6f);
                     Vector3 a = ptDn-Target;
                     Vector3 b = ptMv-Target;
                     if (a!=b)
                     {
                         var axis = Vector3.Normalize(Vector3.Cross(a, b));
-                        var angle = Geometry.GetAngleBetwenVectors(a, b);
-                        Orientation *= Quaternion.CreateFromAxisAngle(axis, angle);
-                        mouse = (mouse.msMove, mouse.msMove, mouse.msUp, mouse.buttons);
+                        if (axis.IsFinite())
+                        {
+                            var angle = Geometry.GetAngleBetwenVectors(a, b);
+                            if (angle.IsFinite())
+                            {
+                                Orientation *= Quaternion.CreateFromAxisAngle(axis, angle);
+                                mouse = (mouse.msMove, mouse.msMove, mouse.msUp, mouse.buttons);
+                            }
+                        }
                     }
                 }
             };
