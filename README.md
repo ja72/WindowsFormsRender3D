@@ -10,4 +10,4 @@ A `Timer` object advances the frames in the windows form.
 
 ### Screenshot
 
-![scr](Images/2022-06-18_16_49_58-3D Scene Render.png)
+![scr](https://github.com/ja72/WindowsFormsRender3D/blob/master/Images/2022-06-18_16_49_58-3D%20Scene%20Render.png)
