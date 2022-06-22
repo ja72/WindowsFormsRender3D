@@ -13,8 +13,30 @@ namespace JA.Dynamics
         }
         public Pose Pose { get => data.pose; }
         public Vector33 Momentum { get => data.momentum; }
+        public BodyDynamics GetDynamics(RigidBody body) => new BodyDynamics(body, this);
+        public Vector33 GetLoading(RigidBody body, Vector33 motion, double time, Vector3 gravity)
+        {
+            var f = Vector33.WrenchAt(body.Mass * gravity, Pose.FromLocal(body.CG));
+            if (body.Loading!=null)
+            {
+                f += body.Loading(time, Pose, motion);
+            }
+            return f;
+        }
         public BodyState GetRate(Simulation simulation, int index, double h = 0)
         {
+            //Quaternion.Normalize()
+            //BodyState.GetRate(0.000833333314706882)
+            //Vector3.Transform(<(-0.707106699056426,0.000828640283403142,0.000828640249121436)|0.707105892253871>)
+            //Quaternion.Rotate(False)
+            //RigidBody.GetInertiaMatrix(True)
+            //Quaternion.ToRotation(False)
+            //RigidBody.GetInertiaMatrix(True)
+            //Vector3.Transform(<(-0.707106699056426,0.000828640283403142,0.000828640249121436)|0.707105892253871>)
+            //Quaternion.Rotate(False)
+            //RigidBody.GetMotion(M_C)
+            //Quaternion.Multiply()
+
             var rb = simulation.Bodies[index];
             var q = Pose.Orientation;
             var cg = Vector3.Transform(rb.CG, q);
@@ -87,5 +109,4 @@ namespace JA.Dynamics
             }
         }
     }
-
 }

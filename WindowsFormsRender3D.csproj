@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Dynamics\BodyDynamics.cs" />
     <Compile Include="ExperimentalAttribute.cs" />
     <Compile Include="Geometry\Bounds.cs" />
     <Compile Include="Drawing\FastBitmap.cs" />

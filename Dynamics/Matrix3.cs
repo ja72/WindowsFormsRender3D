@@ -112,7 +112,15 @@ namespace JA.Dynamics
         public double A31 { get => data.a31; }
         public double A32 { get => data.a32; }
         public double A33 { get => data.a33; }
-
+        public double Determinant
+        {
+            get => data.a11 * (data.a22 * data.a33 - data.a23 * data.a32)
+                + data.a12 * (data.a23 * data.a31 - data.a21 * data.a33)
+                + data.a13 * (data.a21 * data.a32 - data.a22 * data.a31);
+        }
+        public bool IsSingular { get => Determinant == 0; }
+        public bool IsZero { get => this == Zero; }
+        public bool IsIdentity { get => this == Identity; }
         public Vector3 GetRow(int row)
         {
             switch (row)
@@ -206,10 +214,7 @@ namespace JA.Dynamics
 
         public Matrix3 Inverse()
         {
-            var d = data.a11 * (data.a22 * data.a33 - data.a23 * data.a32) 
-                + data.a12 * (data.a23 * data.a31 - data.a21 * data.a33)
-                + data.a13 * (data.a21 * data.a32 - data.a22 * data.a31);
-            var id = 1 / d;
+            var id = 1 / Determinant;
             return new Matrix3(
                 id*(data.a22 * data.a33 - data.a23 * data.a32), 
                 id*(data.a13 * data.a32 - data.a12 * data.a33), 

@@ -87,9 +87,20 @@ namespace JA.Dynamics
         public Matrix3 ToRotation(bool inverse = false)
         {
             int inv = inverse ? -1 : 1;
+#if !BY_VECTOR
+            double c = data.s, v2 = 1 - c * c;
+            double s = inv*data.v.Magnitude;
+            double x = data.v.X, y = data.v.Y, z = data.v.Z;
+            double y2z2 = y * y + z * z, x2z2 = x * x + z * z, x2y2 = x * x + y * y;
+            return new Matrix3(
+                1 - 2 * v2 * y2z2, 2 * s * (s * x * y - c * z), 2 * s * (s * x * z + c * y),
+                2 * s * (s * x * y + c * z), 1 - 2 * v2 * x2z2, 2 * s * (s * y * z - c * x),
+                2 * s * (s * x * z - c * y), 2 * s * (c * x + s * y * z), 1 - 2 * v2 * x2y2);
+#else
             Matrix3 vx = data.v.CrossOp();
             Matrix3 neg_vxvx = Dynamics.Mmoi(data.v);
             return 1 + 2 * (inv * data.s * vx - neg_vxvx);
+#endif
         }
         public Vector3 Rotate(Vector3 vector, bool inverse = false)
         {

@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace JA
 {
-    [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = false)]
     sealed class ExperimentalAttribute : Attribute
     {
         public ExperimentalAttribute()

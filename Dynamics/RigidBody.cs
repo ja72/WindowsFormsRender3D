@@ -5,6 +5,7 @@ using System.Drawing;
 
 namespace JA.Dynamics
 {
+    using System.Diagnostics;
     using JA.Geometry;
 
     using static DoubleConstants;
@@ -72,7 +73,14 @@ namespace JA.Dynamics
             CG = cg/V;
             var ρ = mass/V;
             Mmoi = ρ*I0 - Dynamics.Mmoi(CG, mass);
-            InvMmoi = Mmoi.Inverse();
+            if (!Mmoi.IsSingular)
+            {
+                InvMmoi = Mmoi.Inverse();
+            }
+            else
+            {
+                InvMmoi = Matrix3.Zero;
+            }
         }
         public double Volume { get; }
         public double Density { get => Mass/Volume; }
@@ -89,19 +97,25 @@ namespace JA.Dynamics
         public Drawing.VisibleObject Graphics { get; }
         public Matrix3 GetInertiaMatrix(Quaternion orientation, bool inverse = false)
         {
-            Matrix3 R = orientation.ToRotation();
-            Matrix3 Rt = R.Transpose();
+            return GetInertiaMatrix(orientation.ToRotation(), inverse);
+        }
+        public Matrix3 GetInertiaMatrix(Matrix3 rotation, bool inverse = false)
+        {
+            Matrix3 inv_rotation = rotation.Transpose();
             if (!inverse)
             {
-                return R * Mmoi * Rt;
+                return rotation * Mmoi * inv_rotation;
             }
             else
             {
-                return R * InvMmoi * Rt;
+                return rotation * InvMmoi * inv_rotation;
             }
         }
         public Vector33 GetMomentum(Quaternion orientation, Vector33 motion)
-            => GetMomentum(motion, GetInertiaMatrix(orientation), Vector3.Transform(CG, orientation));
+        {
+            return GetMomentum(motion, GetInertiaMatrix(orientation), Vector3.Transform(CG, orientation));
+        }
+
         public Vector33 GetMomentum(Vector33 velocity, Matrix3 I_C, Vector3 cg)
         {
             //tex: Momentum from motion summed not at the cg
@@ -109,6 +123,7 @@ namespace JA.Dynamics
             // p&=m\left(v_{A}+\omega\times c\right)\\
             // L_{A}& =I_{C}\omega+c\times p
             // \end{aligned}$$
+
             var v_A = velocity.Translational;
             var ω = velocity.Rotational;
             var p = Mass * (v_A + Vector3.Cross(ω, cg));
@@ -140,7 +155,7 @@ namespace JA.Dynamics
             //\tau_{A}&=I_{C}\,\alpha+\omega\times I_{C}\,\omega+ c\times F
             // \end{aligned}$$
 
-            //var v_A = velocity.Translational;
+
             var ω = velocity.Rotational;
             var a_A = acceleration.Translational;
             var α = acceleration.Rotational;
@@ -156,7 +171,7 @@ namespace JA.Dynamics
             //a_{A}&=\tfrac{1}{m}F-\alpha\times c-\omega\times\left(\omega\times c\right)
             // \end{aligned}$$
 
-            //var v_A = velocity.Translational;
+            
             var ω = velocity.Rotational;
             var F = netLoad.Translational;
             var τ_A = netLoad.Rotational;
@@ -172,7 +187,6 @@ namespace JA.Dynamics
             //\alpha& =I_{C}^{-1}\left(\tau_{A}-\omega\times L_{A}-v_{A}\times p-c\times G\right)\\
             //a_{A}&=\tfrac{1}{m}G-\alpha\times c-v_{A}\times\omega
             // \end{aligned}$$
-
 
             var velocity = GetMotion(momentum, M_C, cg);
             var v_A = velocity.Translational;

@@ -52,7 +52,7 @@ namespace JA.Dynamics
             foreach (var s in current)
             {
                 var rb = bodies[index++];
-                var cg = s.Pose.FromLocal(rb.CG);
+                var cg = s.Pose.FromLocalDirection(rb.CG);
                 var M_C = rb.GetInertiaMatrix(s.Pose.Orientation, true);
                 var v = rb.GetMotion(s.Momentum, M_C, cg);
                 var f = Vector33.WrenchAt(rb.Mass * Gravity, s.Pose.Position);
