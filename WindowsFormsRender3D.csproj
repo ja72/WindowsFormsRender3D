@@ -6,6 +6,7 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
+		<RootNamespace>JA</RootNamespace>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 	<ItemGroup>
