@@ -4,11 +4,9 @@
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
-		<RootNamespace>JA</RootNamespace>
-		<AssemblyName>JA.WindowsFormsRender3D</AssemblyName>
 		<LangVersion>latest</LangVersion>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Include="Resources\**\*.*" />
