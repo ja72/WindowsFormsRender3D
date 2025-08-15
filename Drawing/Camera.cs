@@ -104,7 +104,9 @@ namespace JA.Drawing
         /// Zooms the camera in or out based on mouse wheel delta
         /// </summary>
         /// <param name="delta">Mouse wheel delta (positive = zoom in, negative = zoom out)</param>
+#pragma warning disable IDE0060 // Remove unused parameter
         public void Zoom(Point location, int delta)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             // Get current scene size
             float currentSceneSize = SceneSize;
@@ -287,7 +289,7 @@ namespace JA.Drawing
             }
             return RectangleF.Empty;
         }
-        public PointF[] Project(Triangle triangle) => Project(new[] { triangle.A, triangle.B, triangle.C });
+        public PointF[] Project(Triangle triangle) => Project(triangle.A, triangle.B, triangle.C);
         public PointF[] Project(Polygon polygon) => Project(polygon.Nodes);
         /// <summary>
         /// Projects the specified nodes into a 2D canvas by applied the camera 
@@ -295,7 +297,7 @@ namespace JA.Drawing
         /// </summary>
         /// <param name="nodes">The nodes to project.</param>
         /// <returns>A list of Gdi points</returns>
-        public PointF[] Project(Vector3[] nodes)
+        public PointF[] Project(params Vector3[] nodes)
         {
             float r = 2 * (float)Math.Tan(FOV / 2 * Math.PI / 180);
             float camDist = SceneSize / r;

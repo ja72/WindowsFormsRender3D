@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 
 namespace JA.Dynamics
@@ -184,16 +185,18 @@ namespace JA.Dynamics
 
         #region Formatting
         public override string ToString() => ToString("g");
-        public string ToString(string formatting) => ToString(formatting, null);
-        public string ToString(string format, IFormatProvider provider)
+        public string ToString(string formatting) => ToString(formatting, CultureInfo.CurrentCulture.NumberFormat);
+        public string ToString(string? format, IFormatProvider? provider)
         {
+            format??="g"; // Provide a default format if null
+            provider??=CultureInfo.CurrentCulture.NumberFormat; // Provide a default provider if null
             return $"<{Vector.ToString(format, provider)}|{Scalar.ToString(format, provider)}>";
         }
         #endregion
 
         #region Equality
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is Quaternion quaternion
                 && Equals(quaternion);
@@ -241,7 +244,7 @@ namespace JA.Dynamics
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
         public void CopyTo(double[] array, int index) => CopyTo(array as Array, index);
         public void CopyTo(Array array, int index) => Array.Copy(ToArray(), 0, array, index, Count);
-        [Browsable(false)]public object SyncRoot => null;
+        [Browsable(false)]public object SyncRoot => new object();
         [Browsable(false)]public bool IsSynchronized => false;
         #endregion
 

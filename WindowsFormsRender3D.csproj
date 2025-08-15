@@ -8,6 +8,7 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>JA</RootNamespace>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Include="Resources\**\*.*" />

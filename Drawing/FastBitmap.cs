@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace JA.Drawing
 {
-    public unsafe class FastBitmap : IDisposable
+    public unsafe sealed class FastBitmap : IDisposable
     {
         private readonly byte* ptr;
         public FastBitmap(Bitmap bmp, ImageLockMode lockMode)

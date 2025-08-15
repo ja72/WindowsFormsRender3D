@@ -173,7 +173,7 @@ namespace JA
 
             //TimeFactor = 0.2f;
 
-            stopButton_Click(this, null);
+            stopButton_Click(this, EventArgs.Empty);
             tabControl1.SelectedIndex = 0;
         }
 

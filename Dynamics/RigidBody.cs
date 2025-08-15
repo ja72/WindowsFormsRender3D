@@ -17,37 +17,45 @@ namespace JA.Dynamics
         public RigidBody(double mass, Drawing.VisibleSolid solid, Pose pose, Vector33 velocity)
         {
             Mass=mass;
-            Graphics = solid;
-            InitialPosition = pose;
-            InitialMotion = velocity;
+            Graphics=solid;
+            InitialPosition=pose;
+            InitialMotion=velocity;
 
             Vector3 cg = solid.Geometry.Center;
             double V = solid.Geometry.Volume;
-            Mmoi = solid.Geometry.GetMmoiAtCenter(mass);
-            InvMmoi = Mmoi.Inverse();
+            Mmoi=solid.Geometry.GetMmoiAtCenter(mass);
+            InvMmoi=Mmoi.Inverse();
+
+            // Initialize Loading to a default value to satisfy non-nullable property
+            Loading=(time, p, m) => Vector33.Zero;
         }
+
         public RigidBody(double mass, Drawing.VisibleSphere sphere, Pose pose, Vector33 velocity)
         {
             Mass=mass;
-            Graphics = sphere;
-            InitialPosition = pose;
-            InitialMotion = velocity;
+            Graphics=sphere;
+            InitialPosition=pose;
+            InitialMotion=velocity;
 
             Vector3 cg = sphere.Sphere.Center;
             double V = sphere.Sphere.Volume;
             double R = sphere.Sphere.Radius;
-            double I0 = 2*mass*R*R/5;
-            Volume = V;
-            CG = cg;
-            Mmoi = Matrix3.Scalar(I0);
-            InvMmoi = Matrix3.Scalar(1/I0);
+            double I0 = 2 * mass * R * R / 5;
+            Volume=V;
+            CG=cg;
+            Mmoi=Matrix3.Scalar(I0);
+            InvMmoi=Matrix3.Scalar(1/I0);
+
+            // Initialize Loading to a default value to satisfy non-nullable property
+            Loading=(time, p, m) => Vector33.Zero;
         }
+
         public RigidBody(double mass, Drawing.VisibleMesh localMesh, Pose pose, Vector33 velocity)
         {
             Mass=mass;
-            Graphics = localMesh;
-            InitialPosition = pose;
-            InitialMotion = velocity;
+            Graphics=localMesh;
+            InitialPosition=pose;
+            InitialMotion=velocity;
 
             Vector3 cg = Vector3.Zero;
             double V = 0.0;
@@ -61,29 +69,33 @@ namespace JA.Dynamics
                     var B = (Vector3)trig.B;
                     var C = (Vector3)trig.C;
 
-                    double dV = Vector3.Dot(A, Vector3.Cross(B, C))/6;
-                    V += dV;
-                    Vector3 dCG = (A+B+C)/4;
-                    cg += dV*dCG;
-                    Matrix3 dI = (Dynamics.Mmoi(A+B) + Dynamics.Mmoi(B+C) + Dynamics.Mmoi(C+A))/20;
-                    I0 += dV*dI;
+                    double dV = Vector3.Dot(A, Vector3.Cross(B, C)) / 6;
+                    V+=dV;
+                    Vector3 dCG = (A + B + C) / 4;
+                    cg+=dV*dCG;
+                    Matrix3 dI = (Dynamics.Mmoi(A + B) + Dynamics.Mmoi(B + C) + Dynamics.Mmoi(C + A)) / 20;
+                    I0+=dV*dI;
                 }
             }
-            Volume = V;
-            CG = cg/V;
-            var ρ = mass/V;
-            Mmoi = ρ*I0 - Dynamics.Mmoi(CG, mass);
+            Volume=V;
+            CG=cg/V;
+            var ρ = mass / V;
+            Mmoi=ρ*I0-Dynamics.Mmoi(CG, mass);
             if (!Mmoi.IsSingular)
             {
-                InvMmoi = Mmoi.Inverse();
+                InvMmoi=Mmoi.Inverse();
             }
             else
             {
-                InvMmoi = Matrix3.Zero;
+                InvMmoi=Matrix3.Zero;
             }
+
+            // Initialize Loading to a default value to satisfy non-nullable property
+            Loading=(time, p, m) => Vector33.Zero;
         }
+
         public double Volume { get; }
-        public double Density { get => Mass/Volume; }
+        public double Density => Mass/Volume;
         public double Mass { get; }
         [Browsable(false)]
         public Matrix3 Mmoi { get; }

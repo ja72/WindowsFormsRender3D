@@ -251,10 +251,10 @@ namespace JA.Dynamics
         #region Formatting
         public override string ToString() => ToString("g");
         public string ToString(string formatting) => ToString(formatting, null);
-        public string ToString(string format, IFormatProvider provider)
+        public string ToString(string? format, IFormatProvider? provider)
         {
-            return $"[{data.a11.ToString(format, provider)},{data.a12.ToString(format, provider)},{data.a13.ToString(format, provider)}|" + Environment.NewLine +
-                $"{data.a21.ToString(format, provider)},{data.a22.ToString(format, provider)},{data.a23.ToString(format, provider)}|" + Environment.NewLine +
+            return $"[{data.a11.ToString(format, provider)},{data.a12.ToString(format, provider)},{data.a13.ToString(format, provider)}|"+Environment.NewLine+
+                $"{data.a21.ToString(format, provider)},{data.a22.ToString(format, provider)},{data.a23.ToString(format, provider)}|"+Environment.NewLine+
                 $"{data.a31.ToString(format, provider)},{data.a32.ToString(format, provider)},{data.a33.ToString(format, provider)}]";
         }
         #endregion
@@ -324,7 +324,7 @@ namespace JA.Dynamics
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
         public void CopyTo(double[] array, int index) => CopyTo(array as Array, index);
         public void CopyTo(Array array, int index) => Array.Copy(ToArray(), 0, array, index, Count);
-        public object SyncRoot => null;
+        public object SyncRoot => new object();
         public bool IsSynchronized => false;
         #endregion
 
