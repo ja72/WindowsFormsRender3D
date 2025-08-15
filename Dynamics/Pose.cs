@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,7 +56,7 @@ namespace JA.Dynamics
         /// </summary>
         /// <param name="obj">The object to compare this with</param>
         /// <returns>False if object is a different type, otherwise it calls <code>Equals(Pose)</code></returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is Pose item && Equals(item);
         }
@@ -77,7 +78,7 @@ namespace JA.Dynamics
 
         #region Formatting
         public override string ToString() => ToString("g");
-        public string ToString(string formatting) => ToString(formatting, null);
+        public string ToString(string formatting) => ToString(formatting, CultureInfo.CurrentCulture.NumberFormat);
         public string ToString(string formatting, IFormatProvider formatProvider)
         {
             return $"{Position.ToString(formatting, formatProvider)}-{Orientation.ToString(formatting, formatProvider)}";

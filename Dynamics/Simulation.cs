@@ -14,16 +14,16 @@ namespace JA.Dynamics
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public class Simulation
     {
-        public event EventHandler<SimulationEventArgs> Step;
+        public event EventHandler<SimulationEventArgs>? Step; // Declare the event as nullable to resolve CS8618
 
         readonly List<RigidBody> bodies;
         readonly List<BodyState> states;
 
         public Simulation()
         {
-            this.bodies = new List<RigidBody>();
-            this.states = new List<BodyState>();
-            Triad = new VisibleTriad("W");
+            this.bodies=new List<RigidBody>();
+            this.states=new List<BodyState>();
+            Triad=new VisibleTriad("W");
         }
         [Category("Model")]
         public Vector3 Gravity { get; set; } = 0*Vector3.UnitY;
@@ -35,17 +35,17 @@ namespace JA.Dynamics
         public double Time { get; private set; }
         public void Reset()
         {
-            Time = 0;
+            Time=0;
             states.Clear();
             states.AddRange(
-                bodies.Select((rb) => 
+                bodies.Select((rb) =>
                     new BodyState(
-                        rb.InitialPosition, 
+                        rb.InitialPosition,
                         rb.GetMomentum(rb.InitialPosition.Orientation, rb.InitialMotion))
                     )
                 );
         }
-        
+
         public IEnumerable<Vector33> GetLoading(double time, IEnumerable<BodyState> current)
         {
             int index = 0;
@@ -58,7 +58,7 @@ namespace JA.Dynamics
                 var f = Vector33.WrenchAt(rb.Mass * Gravity, s.Pose.Position);
                 if (rb.Loading!=null)
                 {
-                    f += rb.Loading(time, s.Pose, v);
+                    f+=rb.Loading(time, s.Pose, v);
                 }
                 yield return f;
             }
@@ -70,9 +70,9 @@ namespace JA.Dynamics
         public IEnumerable<BodyState> GetRate(IEnumerable<BodyState> current, double h, IEnumerable<BodyState> rates)
         {
             int index = 0;
-            foreach (var staterate in Enumerable.Zip(current,rates,(state,rate)=>(state,rate)))
+            foreach (var staterate in Enumerable.Zip(current, rates, (state, rate) => (state, rate)))
             {
-                var (state, rate)= staterate;
+                var (state, rate)=staterate;
                 var next = BodyState.Normalize(BodyState.AddScale(state, rate, h));
                 yield return next.GetRate(this, index++, h);
             }
@@ -89,9 +89,9 @@ namespace JA.Dynamics
             var next = current.ToArray().Clone() as BodyState[];
             double h3 = h/3, h6 = h/6;
 
-            for (int i = 0; i < k0.Length; i++)
+            for (int i = 0; i<k0.Length; i++)
             {
-                next[i] = BodyState.Normalize( next[i] + h6*k0[i] + h3*k1[i] + h3*k2[i] + h6*k3[i]);
+                next[i]=BodyState.Normalize(next[i]+h6*k0[i]+h3*k1[i]+h3*k2[i]+h6*k3[i]);
             }
             return next;
         }
@@ -100,9 +100,9 @@ namespace JA.Dynamics
         {
             if (bodies.Count==0) return 1;
             var ω_max = states.Select((s, index) => bodies[index]
-                .GetMotion(s.Pose.Orientation, s.Momentum).Rotational)
-                .Max((ω) => ω.Magnitude);
-            return ω_max>0 ? Math.PI/(360*ω_max) : 1;
+                        .GetMotion(s.Pose.Orientation, s.Momentum).Rotational)
+                        .Max((ω) => ω.Magnitude);
+            return ω_max>0 ? Math.PI/( 360*ω_max ) : 1;
         }
         public void Run(double endTime)
         {
@@ -113,12 +113,12 @@ namespace JA.Dynamics
         public void Run(int n_steps)
         {
             double h = EstimateMaxTimeStep();
-            Run(Time + h*n_steps, n_steps);
+            Run(Time+h*n_steps, n_steps);
         }
 
         public void Run(double endTime, int n_steps)
         {
-            if (states.Count == 0)
+            if (states.Count==0)
             {
                 Reset();
             }
@@ -134,7 +134,7 @@ namespace JA.Dynamics
 
                 states.Clear();
                 states.AddRange(next);
-                Time += h_next;
+                Time+=h_next;
                 Step?.Invoke(this, new SimulationEventArgs(this));
             }
         }
@@ -153,7 +153,7 @@ namespace JA.Dynamics
         }
         public RigidBody AddBody(RigidBody body, Pose initial)
         {
-            body.InitialPosition = initial;
+            body.InitialPosition=initial;
             bodies.Add(body);
             return body;
         }
@@ -161,15 +161,15 @@ namespace JA.Dynamics
         {
             bodies.Add(body);
             return body;
-        }        
-        
+        }
+
         [Category("Model")]
         public VisibleTriad Triad { get; }
         public void Render(Camera camera, Graphics g)
         {
             var state = g.Save();
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            g.TranslateTransform(camera.OnControl.ClientSize.Width / 2f, camera.OnControl.ClientSize.Height / 2f);
+            g.SmoothingMode=SmoothingMode.AntiAlias;
+            g.TranslateTransform(camera.OnControl.ClientSize.Width/2f, camera.OnControl.ClientSize.Height/2f);
             //var light = camera.LightPos.Unit();
             //var R = System.Numerics.Matrix4x4.CreateFromQuaternion(System.Numerics.Quaternion.Inverse(camera.Orientation));
             //light = System.Numerics.Vector3.TransformNormal(light, R);
@@ -184,7 +184,7 @@ namespace JA.Dynamics
             int index = 0;
             foreach (var rb in Bodies)
             {
-                if (rb.Graphics ==null) continue;
+                if (rb.Graphics==null) continue;
                 var pose = states[index++].Pose;
                 rb.Render(g, camera, pose.ToFloat());
             }

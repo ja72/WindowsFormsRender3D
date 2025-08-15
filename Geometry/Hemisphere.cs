@@ -105,7 +105,7 @@ namespace JA.Geometry
         }
 
         #region Equality
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is Hemisphere hemisphere&&Equals(hemisphere);
         }

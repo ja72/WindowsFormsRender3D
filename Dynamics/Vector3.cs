@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -176,8 +177,8 @@ namespace JA.Dynamics
 
         #region Formatting
         public override string ToString() => ToString("g");
-        public string ToString(string formatting) => ToString(formatting, null);
-        public string ToString(string format, IFormatProvider provider)
+        public string ToString(string formatting) => ToString(formatting, CultureInfo.CurrentCulture);
+        public string ToString(string? format, IFormatProvider? provider)
         {
             return $"({X.ToString(format, provider)},{Y.ToString(format, provider)},{Z.ToString(format, provider)})";
         }

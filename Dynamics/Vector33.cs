@@ -36,7 +36,7 @@ namespace JA.Dynamics
         #endregion
 
         #region Equality
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is Vector33 vector && Equals(vector);
         }
