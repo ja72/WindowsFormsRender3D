@@ -373,7 +373,130 @@ namespace JA.Geometry
 
             return mesh;
         }
+        /// <summary>
+        /// Verbindet dieses Mesh mit einem anderen Mesh (statische Hilfsfunktion).
+        /// </summary>
+        public static Mesh Merge(Mesh baseMesh, Mesh addedMesh, Vector3 offset)
+        {
+            // --- SCHRITT 1: Bereinigung der Nodes (Punkte) ---
+            // Wir erstellen eine Liste für die finalen, einzigartigen Punkte.
+            List<Vector3> uniqueNodes = new List<Vector3>();
 
+            // Diese Hilfsfunktion sucht einen Punkt in der Liste. 
+            // Wenn er existiert, gibt sie den Index zurück. Wenn nicht, fügt sie ihn hinzu.
+            // Wir nutzen eine kleine Toleranz (0.0001f), damit 0.999999 als 1.0 erkannt wird.
+            int GetOrAddNodeIndex(Vector3 p)
+            {
+                for (int i = 0; i < uniqueNodes.Count; i++)
+                {
+                    // Abstand quadratisch prüfen (schneller als Wurzel ziehen)
+                    float dx = uniqueNodes[i].X - p.X;
+                    float dy = uniqueNodes[i].Y - p.Y;
+                    float dz = uniqueNodes[i].Z - p.Z;
+
+                    if ((dx * dx + dy * dy + dz * dz) < 0.0001f)
+                        return i; // Punkt existiert schon! Index zurückgeben.
+                }
+
+                // Punkt ist neu -> hinzufügen
+                uniqueNodes.Add(p);
+                return uniqueNodes.Count - 1;
+            }
+
+            // --- SCHRITT 2: Flächen sammeln und Indizes neu berechnen ---
+            // Wir speichern alle Flächen erstmal in einer temporären Liste
+            List<Face> tempFaces = new List<Face>();
+
+            // A) Flächen vom Basis-Mesh verarbeiten
+            foreach (var face in baseMesh.Faces)
+            {
+                int[] newIndices = new int[face.NodeIndex.Length];
+                for (int i = 0; i < face.NodeIndex.Length; i++)
+                {
+                    // Alten Punkt holen
+                    Vector3 p = baseMesh.Nodes[face.NodeIndex[i]];
+                    // In die neue "saubere" Liste einsortieren
+                    newIndices[i] = GetOrAddNodeIndex(p);
+                }
+                Face f = new Face(newIndices);
+                tempFaces.Add(f);
+            }
+
+            // B) Flächen vom neuen Mesh verarbeiten (mit Offset!)
+            foreach (var face in addedMesh.Faces)
+            {
+                int[] newIndices = new int[face.NodeIndex.Length];
+                for (int i = 0; i < face.NodeIndex.Length; i++)
+                {
+                    // Alten Punkt holen UND Offset draufrechnen
+                    Vector3 p = addedMesh.Nodes[face.NodeIndex[i]] + offset;
+                    // In die neue "saubere" Liste einsortieren
+                    newIndices[i] = GetOrAddNodeIndex(p);
+                }
+                Face f = new Face(newIndices);
+                tempFaces.Add(f);
+            }
+
+            // --- SCHRITT 3: Doppelte (innere) Flächen entfernen ---
+            // Jetzt haben wir alle Flächen, aber Deckel und Boden sind noch da.
+            // Da wir die Punkte verschmolzen haben, teilen sich Deckel und Boden 
+            // jetzt EXAKT die gleichen Indizes (z.B. 4,5,6,7), evtl. in anderer Reihenfolge.
+
+            List<Face> finalFaces = new List<Face>();
+
+            // Liste von Flächen, die wir überspringen (löschen) wollen
+            bool[] skipFace = new bool[tempFaces.Count];
+
+            for (int i = 0; i < tempFaces.Count; i++)
+            {
+                if (skipFace[i]) continue; // Schon als Duplikat markiert
+
+                for (int j = i + 1; j < tempFaces.Count; j++)
+                {
+                    if (skipFace[j]) continue;
+
+                    // Prüfen ob Fläche i und Fläche j identisch sind (gleiche Punkte)
+                    if (AreFacesOverlapping(tempFaces[i], tempFaces[j]))
+                    {
+                        // TREFFER! Das ist eine innere Wand (z.B. Würfel-Oben und Pyramide-Unten).
+                        // Wir markieren BEIDE zum Löschen, damit der Körper hohl wird.
+                        skipFace[i] = true;
+                        skipFace[j] = true;
+                        break; // Wir haben den Partner gefunden, innere Schleife abbrechen
+                    }
+                }
+            }
+
+            // Nur die nicht-markierten Flächen übernehmen
+            for (int i = 0; i < tempFaces.Count; i++)
+            {
+                if (!skipFace[i]) finalFaces.Add(tempFaces[i]);
+            }
+
+            return new Mesh(uniqueNodes.ToArray(), finalFaces.ToArray());
+        }
+
+        // Hilfsfunktion: Prüft ob zwei Flächen die gleichen Punkte nutzen
+        private static bool AreFacesOverlapping(Face f1, Face f2)
+        {
+            // Wenn Anzahl der Ecken ungleich, können sie nicht gleich sein
+            if (f1.NodeIndex.Length != f2.NodeIndex.Length) return false;
+
+            // Wir sortieren die Indizes temporär, um sie zu vergleichen.
+            // (Denn [1,2,3,4] ist geometrisch das gleiche wie [4,3,2,1])
+            var sorted1 = new List<int>(f1.NodeIndex);
+            sorted1.Sort();
+
+            var sorted2 = new List<int>(f2.NodeIndex);
+            sorted2.Sort();
+
+            for (int k = 0; k < sorted1.Count; k++)
+            {
+                if (sorted1[k] != sorted2[k]) return false; // Unterschied gefunden
+            }
+
+            return true; // Alle Indizes sind gleich!
+        }
     }
 
 }
